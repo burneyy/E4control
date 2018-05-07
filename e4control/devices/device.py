@@ -4,6 +4,8 @@ import vxi11
 from pylink import TCPLink
 import serial
 
+from .prologix import Prologix
+
 class Device(object):
     com = None
     trm = '\r\n'
@@ -25,9 +27,13 @@ class Device(object):
             self.com = vxi11.Instrument(host, sPort)
         elif (connection_type == 'usb'):
             self.com = serial.Serial(host, 9600)
+        elif (connection_type == 'prologix'):
+            self.com = Prologix(host, port)
 
     def __enter__(self):
         self.open()
+        if (connection_type == 'prologix'):
+            self.com.setup()
         return self
 
     def __exit__(self, exc_type, exc_value, traceback):
