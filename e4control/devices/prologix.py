@@ -2,6 +2,7 @@
 
 from pylink import TCPLink
 
+
 class Prologix():
     com = None
     host = None
@@ -35,4 +36,6 @@ class Prologix():
     def setup(self):
         self.com.write('++mode 1')
         self.com.write('++auto 0')
-        # self.com.write('++eos 0')
+        self.com.write('++eos 3')
+        # self.com.write('++eoi 1')
+        self.com.write('++read_tmo_ms 1000')
