@@ -2,7 +2,7 @@
 
 from pylink import TCPLink
 
-class prologix():
+class Prologix():
     com = None
     host = None
     port = None
