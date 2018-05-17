@@ -78,7 +78,7 @@ class Device(object):
 #        return s
 
     def write(self, cmd):
-        if (self.connection_type == 'proltest')
+        if (self.connection_type == 'proltest'):
             try:
                 self.com.write(cmd)
             except:
@@ -86,7 +86,7 @@ class Device(object):
                 try:
                     self.com.write(cmd)
                 except:
-                    print('Timeout while writing')            
+                    print('Timeout while writing')
         else:
             cmd = cmd + self.trm
             try:
