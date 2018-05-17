@@ -78,15 +78,25 @@ class Device(object):
 #        return s
 
     def write(self, cmd):
-        cmd = cmd + self.trm
-        try:
-            self.com.write(cmd)
-        except:
-            self.reconnect()
+        if (self.connection_type == 'proltest')
             try:
                 self.com.write(cmd)
             except:
-                print('Timeout while writing')
+                self.reconnect()
+                try:
+                    self.com.write(cmd)
+                except:
+                    print('Timeout while writing')            
+        else:
+            cmd = cmd + self.trm
+            try:
+                self.com.write(cmd)
+            except:
+                self.reconnect()
+                try:
+                    self.com.write(cmd)
+                except:
+                    print('Timeout while writing')
 
     def ask(self, cmd):
         self.write(cmd)
