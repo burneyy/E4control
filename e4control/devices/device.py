@@ -7,6 +7,7 @@ import serial
 from .prologix import Prologix
 from .proltest import Proltest
 
+
 class Device(object):
     com = None
     trm = '\r\n'
