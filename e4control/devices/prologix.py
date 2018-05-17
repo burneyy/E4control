@@ -16,7 +16,7 @@ class Prologix():
 
     def open(self):
         self.com.open()
-        self.com.setup()
+        self.setup()
 
     def close(self):
         self.com.close()
