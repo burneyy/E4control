@@ -32,7 +32,7 @@ class Device(object):
 
     def __enter__(self):
         self.open()
-        if (connection_type == 'prologix'):
+        if (self.connection_type == 'prologix'):
             self.com.setup()
         return self
 
