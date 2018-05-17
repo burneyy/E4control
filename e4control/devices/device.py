@@ -5,6 +5,7 @@ from pylink import TCPLink
 import serial
 
 from .prologix import Prologix
+from .proltest import Proltest
 
 class Device(object):
     com = None
@@ -29,6 +30,8 @@ class Device(object):
             self.com = serial.Serial(host, 9600)
         elif (connection_type == 'prologix'):
             self.com = Prologix(host, port)
+        elif (connection_type == 'proltest'):
+            self.com = Proltest(host, port)
 
     def __enter__(self):
         self.open()
