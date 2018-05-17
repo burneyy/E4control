@@ -32,8 +32,6 @@ class Device(object):
 
     def __enter__(self):
         self.open()
-        if (self.connection_type == 'prologix'):
-            self.com.setup()
         return self
 
     def __exit__(self, exc_type, exc_value, traceback):
