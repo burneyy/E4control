@@ -4,10 +4,11 @@ import socket
 
 
 class Proltest():
+    PORT = 1234
     com = None
     host = None
     port = None
-    port_tcp = 1234
+
 
     def __init__(self, host, port):
         self.host = host
@@ -16,7 +17,7 @@ class Proltest():
         self.com.settimeout(1)
 
     def open(self):
-        self.com.connect((self.host, self.port_tcp))
+        self.com.connect((self.host, self.PORT))
         self.setup()
 
     def close(self):
