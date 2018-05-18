@@ -10,7 +10,7 @@ from .proltest import Proltest
 
 class Device(object):
     com = None
-    trm = '\r\n'
+    trm = '\n'
     connection_type = None
     host = None
     port = None
