@@ -27,7 +27,13 @@ class HMP4040(Device):
         self.write('INST OUT%i' % iOutput)
         self.write('OUTP %i' % bValue)
 
+    #Return the value that was set (no matter the power)
     def getEnableOutput(self, iOutput):
+        self.write('INST OUT%i' % iOutput)
+        return self.ask('OUTP:SEL?') == '1'
+
+    #Returns if the output is currently actually enabled=powered
+    def measEnableOutput(self, iOutput):
         self.write('INST OUT%i' % iOutput)
         return self.ask('OUTP?') == '1'
 
