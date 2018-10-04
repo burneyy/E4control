@@ -20,7 +20,7 @@ class HMP4040(Device):
         self.write('OUTP:GEN %i' % bValue)
 
     def getEnablePower(self):
-        return self.ask('OUTP:GEN?')
+        return self.ask('OUTP:GEN?') == '1'
 
     #Output for individual channels
     def enableOutput(self, iOutput, bValue):
@@ -70,8 +70,12 @@ class HMP4040(Device):
     def output(self, show=True):
         sValues = []
         sHeader = []
+        isOn = self.getEnablePower()
         if show:
-            print('HMP4040:')
+            if isOn:
+                print('HMP4040:\t' + '\033[32m ON \033[0m')
+            else:
+                print('HMP4040:\t' + '\033[31m OFF \033[0m')
         ch = 1
         while ch <= 4:
             outp = self.getEnableOutput(ch)
