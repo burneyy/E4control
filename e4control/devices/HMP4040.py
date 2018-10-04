@@ -25,7 +25,7 @@ class HMP4040(Device):
     #Output for individual channels
     def enableOutput(self, iOutput, bValue):
         self.write('INST OUT%i' % iOutput)
-        self.write('OUTP %i' % bvalue)
+        self.write('OUTP %i' % bValue)
 
     def getEnableOutput(self, iOutput):
         self.write('INST OUT%i' % iOutput)
