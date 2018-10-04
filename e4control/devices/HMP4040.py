@@ -29,7 +29,7 @@ class HMP4040(Device):
 
     def getEnableOutput(self, iOutput):
         self.write('INST OUT%i' % iOutput)
-        return self.ask('OUTP?')
+        return self.ask('OUTP?') == '1'
 
     #Over voltage protection
     def setVoltageLimit(self, iOutput, fValue):
@@ -96,7 +96,7 @@ class HMP4040(Device):
             sHeader.append('Imeas%i[V]' % ch)
 
             if show:
-                if outp == '1':
+                if outp:
                     print('CH %i:' % ch + '\t' + '\033[32m ON \033[0m')
                 else:
                     print('CH %i:' % ch + '\t' + '\033[31m OFF \033[0m')
