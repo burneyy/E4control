@@ -68,31 +68,37 @@ class HMP4040(Device):
 
 
     def output(self, show=True):
-        bPower = []
-        fVoltage = []
-        fCurrent = []
         sValues = []
+        sHeader = []
         if show:
             print('HMP4040:')
-        i = 1
-        while i <= 4:
-            a = self.getEnableOutput(i)
-            b = self.measVoltage(i)
-            c = self.measCurrent(i)
-            bPower.append(a)
-            fVoltage.append(b)
-            fCurrent.append(c)
+        ch = 1
+        while ch <= 4:
+            outp = self.getEnableOutput(ch)
+            v = self.getVoltage(ch)
+            vmeas = self.measVoltage(ch)
+            i = self.getCurrent(ch)
+            imeas = self.measCurrent(ch)
+
+            sValues.append(str(outp))
+            sHeader.append('CH%i' % ch)
+            sValues.append(str(v))
+            sHeader.append('U%i[V]' % ch)
+            sValues.append(str(vmeas))
+            sHeader.append('Umeas%i[V]' % ch)
+            sValues.append(str(i))
+            sHeader.append('I%i[V]' % ch)
+            sValues.append(str(imeas))
+            sHeader.append('Imeas%i[V]' % ch)
+
             if show:
-                if a == '1':
-                    print('CH %i:' % i + '\t' + '\033[32m ON \033[0m')
+                if outp == '1':
+                    print('CH %i:' % ch + '\t' + '\033[32m ON \033[0m')
                 else:
-                    print('CH %i:' % i + '\t' + '\033[31m OFF \033[0m')
-                print('Voltage = %0.1fV' % b + '\t' + 'Current = %0.3fA' % c)
-            sValues.append(str(a))
-            sValues.append(str(b))
-            sValues.append(str(c))
-            i += 1
-        sHeader = ['CH1', 'U1[V]', 'I1[A]', 'CH2', 'U2[V]', 'I2[A]', 'CH3', 'U3[V]', 'I3[A]', 'CH4', 'U4[V]', 'I4[A]']
+                    print('CH %i:' % ch + '\t' + '\033[31m OFF \033[0m')
+                print('Vmeas(set) = %0.3f(%0.3f)V' % (vmeas, v) + '\t' + 'Imeas(set) = %0.4f(%0.4f)A' % (imeas, i))
+
+            ch += 1
         return([sHeader, sValues])
 
     def interaction(self):
